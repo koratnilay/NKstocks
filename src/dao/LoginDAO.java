@@ -28,7 +28,8 @@ public class LoginDAO {
     				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", rs.getString("username"));
     				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("status", rs.getString("status"));
     				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("name", rs.getString("name"));
-    				System.out.println(rs.getString("username")+""+rs.getString("role"));
+    				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("role", rs.getString("role"));
+    				
     				Dataconnect.close(con);
     				return true;
     			}

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import controller.Admin;
+import controller.Login;
 import dataconnect.Dataconnect;
 
 public class AdminDAO {
@@ -15,7 +16,7 @@ public class AdminDAO {
 		
 		 try {
 			 	con = Dataconnect.getConnection();
-	            ps = con.prepareStatement("SELECT name,email,phoneno,role, status from users where role=?");
+	            ps = con.prepareStatement("SELECT userid,name,email,phoneno,role, status from users where role=?");
 	            ps.setString(1, "Manager");
 	            ArrayList<Admin> al = new ArrayList<Admin>();
 	            ResultSet rs = ps.executeQuery();
@@ -28,6 +29,8 @@ public class AdminDAO {
 	                e.setManagerphoneno(rs.getString("phoneno"));
 	                e.setManagerrole(rs.getString("role"));
 	                e.setManagerstatus(rs.getString("status"));
+	                e.setManagerid(rs.getString("userid"));
+	                
 	               
 	                al.add(e);
 	                found = true;
@@ -45,4 +48,55 @@ public class AdminDAO {
 	        }
 		
 	}
+	
+	
+	public static boolean approve(String userid) {
+		Connection con = null;
+        PreparedStatement ps = null;
+        		
+		 try {
+			 	con = Dataconnect.getConnection();
+			 				 	
+	            ps = con.prepareStatement("UPDATE users SET status=? WHERE userid=? ");
+	            ps.setString(1, "a");
+	            ps.setString(2, userid);
+	            
+	            
+	            int rs = ps.executeUpdate();
+	            
+	            if(rs>0) {
+	              	
+	            	return true;
+	            }
+		 	}catch (Exception e) {
+		 		return false;
+			}
+		return false;
+	}
+	
+	
+	public static boolean decline(String userid) {
+		Connection con = null;
+        PreparedStatement ps = null;
+        		
+		 try {
+			 	con = Dataconnect.getConnection();
+			 				 	
+	            ps = con.prepareStatement("UPDATE users SET status=? WHERE userid=? ");
+	            ps.setString(1, "d");
+	            ps.setString(2, userid);
+	            
+	            
+	            int rs = ps.executeUpdate();
+	            
+	            if(rs>0) {
+	              	
+	            	return true;
+	            }
+		 	}catch (Exception e) {
+		 		return false;
+			}
+		return false;
+	}
+	
 }

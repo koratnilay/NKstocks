@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<HTML lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://java.sun.com/jsf/core"
+	>
+	
+	<h:head>
+		<title>User Page</title>
+		<meta charset="utf-8"></meta>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" ></link>
+		
+		<link rel="stylesheet" href="css/style.css" ></link>
+	</h:head>
+	
+	<h:body>
+		
+		<div class="container">
+						
+			<h:form id="managerprofile-form" class="form-container" >
+				<div class="form-group">
+					<div class="form-group text-right">
+						<h:commandButton value="Logout" styleClass="btn btn-outline-primary" action="#{user.logout}" />
+					</div > 
+                    <h1>
+                    	Welcome, #{login.name}
+                    </h1>     
+                              
+                </div>
+	            				
+					<div class="form-group text-center">
+						<h:commandButton value="View Profile" styleClass="btn btn-outline-primary" action="#{user.find}" />
+					</div>
+					<div class="form-group text-center">
+						<h:commandButton value="Manage Manager" styleClass="btn btn-outline-primary" action="usermanager" />
+					</div>
+			</h:form>
+			
+			<div class="well">
+                <H1>Search Data</H1>
+
+                <div class="row">
+
+                    <h:form>
+                        <label for="sel1">Stock: </label>
+                        <h:selectOneMenu id="symbol" value="#{stockApiBean.selectedSymbol}">
+                            <f:selectItems value="#{stockApiBean.availableSymbols}" />
+                        </h:selectOneMenu>
+
+                        <label for="sel1">Interval: </label>
+                        <h:selectOneMenu id="interval" value="#{stockApiBean.selectedInterval}">
+                            <f:selectItems value="#{stockApiBean.availableIntervals}" />
+                        </h:selectOneMenu>
+                        <br />
+                        <h:commandButton value="Get Data" action="#{stockApiBean.timeseries}" styleClass="btn btn-success" />
+                    </h:form>
+                </div>
+
+                <h:panelGroup rendered="#{not empty stockApiBean.table1Markup}">
+                    <h:outputText value="#{stockApiBean.table1Markup}" escape="false" styleClass="preformatted" />
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{not empty stockApiBean.table2Markup}">
+                    <h:outputText value="#{stockApiBean.table2Markup}" escape="false" styleClass="preformatted" />
+                </h:panelGroup>
+		</div>
+		</div>
+		
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+		
+	</h:body>
+</HTML>

@@ -7,7 +7,7 @@
 	>
 	
 	<h:head>
-		<title>Registration Page</title>
+		<title>Manager Profile Page</title>
 		<meta charset="utf-8"></meta>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" ></link>
@@ -19,52 +19,46 @@
 		
 		<div class="container">
 		
-			<h:form id="Register-form" class="form-container"> 
-						
+			<h:form id="edituser-form" class="form-container"> 
+			
+				<div class="form-group text-right">
+					<h:commandButton value="Logout" styleClass="btn btn-outline-primary" action="#{user.logout}" />
+				</div>
+				
 				<div class="form-group">
                     <h:outputLabel value="Name"/>
-                    <h:inputText id="name" class="form-control" value="#{register.name}" a:placeholder="Name" required="true" requiredMessage="Please enter Full Name"  styleClass="form-control" />
+                    <h:inputText id="name" class="form-control" value="#{user.name}" required="true" requiredMessage="Please enter Full Name"  styleClass="form-control" />
                 </div>
                 
                 <div class="form-group">
                     <h:outputLabel value="email"/>
-                    <h:inputText id="email" class="form-control" value="#{register.email}" a:placeholder="E-mail" required="true" requiredMessage="Please enter Email"  styleClass="form-control">
+                    <h:inputText id="email" class="form-control" value="#{user.email}" required="true" requiredMessage="Please enter Email"  styleClass="form-control">
                     <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.(com|net|‌​org|edu)"/></h:inputText>
                 </div>
                 
                 <div class="form-group">
                     <h:outputLabel value="phoneno"/>
-                    <h:inputText id="phoneno" class="form-control" value="#{register.phoneno}" a:placeholder="Contact No" required="true" requiredMessage="Please enter Phone Number"  styleClass="form-control">
+                    <h:inputText id="phoneno" class="form-control" value="#{user.phoneno}" required="true" requiredMessage="Please enter Phone Number"  styleClass="form-control">
                     <f:validateRegex pattern="[0-9]{10}"></f:validateRegex></h:inputText>
                 </div>
              
 				<div class="form-group">
                     <h:outputLabel value="Username"/>
-                    <h:inputText id="username" class="form-control" value="#{register.username}" a:placeholder="Username" required="true" requiredMessage="Please enter Username"  styleClass="form-control" />
+                    <h:inputText id="username" class="form-control" value="#{user.username}" required="true" requiredMessage="Please enter Username"  styleClass="form-control" />
                 </div>
 
                 <div class="form-group">
                     <h:outputLabel value="Password"/>
-                    <h:inputSecret id="password" value="#{register.password}" a:placeholder="Password" required="true" requiredMessage="Please enter Password"  styleClass="form-control" />
-                </div>
-                
-                <h:selectOneRadio value="#{register.role}">
-                	<f:selectItem itemValue="User" itemLabel="User"></f:selectItem>
-					<f:selectItem itemValue="Manager" itemLabel="Manager"></f:selectItem>
-			  	</h:selectOneRadio>
-			  	
-                <div class="form-group">
-                    <h:outputLabel value="Fees"/>
-                    <h:inputText id="Fees" value="#{register.fees}"  a:placeholder="Manager Enter your fees"   styleClass="form-control" />
+                    <h:inputSecret id="password" value="#{user.password}" required="true" requiredMessage="Please enter Password"  styleClass="form-control" />
                 </div>
                				
 				<div class="form-group text-center">
-					<h:commandButton value="Register" styleClass="btn btn-outline-primary" action="#{register.registerdb}" />
+					<h:commandButton value="Update" styleClass="btn btn-outline-primary" action="#{user.update}" />
 				</div>
 			</h:form>
 			<h:form>
 				<div class="form-group text-center">
-					<h:commandButton value="Login" styleClass="btn btn-outline-primary" action="login" />
+					<h:commandButton value="Back" styleClass="btn btn-outline-primary" action="userprofile" />
 				</div>
 			</h:form>
 			

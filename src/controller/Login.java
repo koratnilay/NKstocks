@@ -69,9 +69,6 @@ public class Login {
 		}
 
 
-	public void logout() throws IOException {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
-    }
+	
 
 }

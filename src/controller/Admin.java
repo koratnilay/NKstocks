@@ -1,9 +1,12 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import dao.AdminDAO;
 
@@ -12,6 +15,7 @@ import dao.AdminDAO;
 
 public class Admin {
 	
+	private String managerid;
 	private String managername;
 	private String manageremail;
 	private String managerphoneno;
@@ -47,9 +51,39 @@ public class Admin {
 	public void setManagerstatus(String managerstatus) {
 		this.managerstatus = managerstatus;
 	}
-
+	public String getManagerid() {
+		return managerid;
+	}
+	public void setManagerid(String managerid) {
+		this.managerid = managerid;
+	}
+	
+	
+	
 	public ArrayList<Admin> getMessages() {
         return AdminDAO.getUser();
+    }
+	
+	public String approve() {
+	      FacesContext fc = FacesContext.getCurrentInstance();
+	      Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+	      String mid =  params.get("mid"); 
+	      boolean res =AdminDAO.approve(mid);
+	      return "result";
+	   }
+	
+	
+	public String decline() {
+	      FacesContext fc = FacesContext.getCurrentInstance();
+	      Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+	      String mid =  params.get("mid");
+	      boolean res =AdminDAO.decline(mid);
+	      return "adminhome";
+	   }
+	
+	public void logout() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
     }
 	
 }

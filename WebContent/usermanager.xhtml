@@ -7,7 +7,7 @@
 	>
 	
 	<h:head>
-		<title>Admin Page</title>
+		<title>User Page</title>
 		<meta charset="utf-8"></meta>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" ></link>
@@ -18,60 +18,69 @@
 	<h:body>
 		
 		<div class="container">
-		
-			<h:form id="register-form" class="form-container">
-					<div class="form-group text-right">
-						<h:commandButton value="Logout" styleClass="btn btn-outline-primary" action="#{manager.logout}" />
-					</div >
+						
+			<h:form id="managerprofile-form" class="form-container" >
 				<div class="form-group">
+					<div class="form-group text-right">
+						<h:commandButton value="Logout" styleClass="btn btn-outline-primary" action="#{user.logout}" />
+					</div > 
                     <h1>
-                    	Welcome, #{login.username}
-                    </h1>                    
+                    	Welcome, #{login.name}
+                    </h1>     
+                              
                 </div>
                 
                 <div>
-                	<h:dataTable value="#{admin.messages}" var="user" border="2">
+                	<h:dataTable value="#{user.messages}" var="us" border="2">
 					      <h:column>
 							<f:facet name="header">Manager Name</f:facet>
-					        #{user.managername}
+					        #{us.mname}
 					      </h:column>
 					      
 					      <h:column>
 							<f:facet name="header">Manager E-mail</f:facet>
-					        #{user.manageremail}
+					        #{us.memail}
 					      </h:column>
 					      
 					      <h:column>
 							<f:facet name="header">Manager Contact no</f:facet>
-					        #{user.managerphoneno}
+					        #{us.mphoneno}
 					      </h:column>
 					      
 					      <h:column>
 							<f:facet name="header">User Role</f:facet>
-					        #{user.managerrole}
+					        #{us.mrole}
 					      </h:column>
 					      
 					      <h:column>
-							<f:facet name="header">Manager Status</f:facet>
-					        #{user.managerstatus}
+							<f:facet name="header">Manager fees</f:facet>
+					        #{us.mfees}
 					      </h:column>
+					      <h:column>
+							<f:facet name="header">Amount to buy</f:facet>
+					        <h:inputText id="amtbuy" value="#{user.amtbuy}" class="form-control"   styleClass="form-control"/>
+					      </h:column>
+					      <h:column>
+							<f:facet name="header">Amount to Sell</f:facet>
+					        <h:inputText id="amtsell" value="#{user.amtsell}" class="form-control"   styleClass="form-control"/>
+					      </h:column>
+					      
 					       		
 					      <h:column>
-								<h:commandButton value="Approve" styleClass="btn btn-outline-primary" action="#{admin.approve}">
-								<f:param name = "mid" value = "#{user.managerid}" />
+								<h:commandButton value="Request" styleClass="btn btn-outline-primary" action="#{user.reqmanager}">
+								<f:param name = "mid" value = "#{us.mid}" />
 								</h:commandButton>
 					      </h:column>
 					      
-					      <h:column>
-								<h:commandButton value="Decline" styleClass="btn btn-outline-primary" action="#{admin.decline}" >
-								<f:param name = "mid" value = "#{user.managerid}" />
-								</h:commandButton>
-					      </h:column>
+					      
                 		
                 	</h:dataTable>
-                </div>
-				
+	            </div>				
+				<div class="form-group text-center">
+					<h:commandButton value="Back" styleClass="btn btn-outline-primary" action="userhome" />
+				</div>
 			</h:form>
+			
 		</div>
 		
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
