@@ -26,7 +26,9 @@ public class UserDAO {
 	            ArrayList<String> al = new ArrayList<String>();
 	            boolean found = false;
 	            if(rs.next()) {
-	            		           
+	            	User e = new User();
+	            	e.setName(rs.getString("name"));
+	            	e.setUsername(rs.getString("username"));
 	            	al.add(rs.getString("name"));
 	            	al.add(rs.getString("email"));
 	            	al.add(rs.getString("phoneno"));

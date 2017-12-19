@@ -252,13 +252,15 @@ private double amtsell;
 	public String reqmanager() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 	    Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+	    String uname = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
 	    String mid =  params.get("mid");
+	    String managername =  params.get("managername");
 		
-		boolean rs = UserDAO.req(userid,username,mid,mname,amtbuy,amtsell);
+		boolean rs = UserDAO.req(userid,uname,mid,managername,amtbuy,amtsell);
 		System.out.println("rs value in user.java"+rs);
 		if(rs) {
 			System.out.println("going to home");
-			return "managerhome";
+			return "managerhome.xhtml";
 		}else {
 			System.out.println("going to same page");
 			return "usermanager";
